@@ -1,45 +1,32 @@
 #include <zephyr/kernel.h>
 #include <zephyr/logging/log.h>
 
-LOG_MODULE_REGISTER(raptor_threads, LOG_LEVEL_INF);
+// Registra o módulo de log para este arquivo
+LOG_MODULE_REGISTER(raptor_logs, LOG_LEVEL_INF);
 
-#define STACK_SIZE 2048
+// Definição da pilha e prioridade da thread
+#define STACK_SIZE 1024
 #define PRIORITY   7
-#define PERIOD_MS  5000
 
-static void thread_raptor(void *a, void *b, void *c)
+void thread_timer_entry(void *p1, void *p2, void *p3)
 {
-    ARG_UNUSED(a);
-    ARG_UNUSED(b);
-    ARG_UNUSED(c);
-
-    /* Mantém periodicidade estável (sem “drift”) */
-    int64_t next = k_uptime_get() + PERIOD_MS;
-
     while (1) {
-        int64_t now = k_uptime_get();
+        // Pega o tempo atual do sistema para mostrar no print
+        int64_t uptime = k_uptime_get();
+        
+        LOG_INF("Thread Ativa | Uptime real: %lld ms", uptime);
 
-        LOG_INF("Thread em funcionamento! uptime_ms=%lld", now);
-
-        int64_t wait = next - now;
-        next += PERIOD_MS;
-
-        if (wait > 0) {
-            k_msleep((int32_t)wait);
-        } else {
-            /* Atrasou (sem dormir), mas mantém o ritmo */
-            k_yield();
-        }
+        // Faz a thread dormir por 2 segundos de tempo real
+        k_msleep(2000);
     }
 }
 
-/* Cria/inicia a thread no boot */
-K_THREAD_DEFINE(raptor_tid, STACK_SIZE, thread_raptor,
-                NULL, NULL, NULL,
-                PRIORITY, 0, 0);
+// Define e inicia a thread automaticamente
+K_THREAD_DEFINE(timer_thread_id, STACK_SIZE, thread_timer_entry, 
+                NULL, NULL, NULL, PRIORITY, 0, 0);
 
 int main(void)
 {
-    LOG_INF("Testes com Threading!");
+    LOG_INF("Sistema Raptor OS iniciado. Monitorando a cada 2s...");
     return 0;
 }
