@@ -18,7 +18,7 @@ Para este app funcionar, habilitamos no arquivo de configuração:
 - `CONFIG_PRINTK=y`: Permite o envio de strings formatadas para o console.
 
 ### Como rodar:
-Antes de executar a aplicação, configure no seu computador as ferramentas necessárias:
+Antes de executar a aplicação, configure no seu computador as ferramentas necessárias, configurando e adicionando as mesma no PATH:
 - QEMU
 - WEST
 - ZEPHYR
