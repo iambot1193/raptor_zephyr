@@ -18,6 +18,18 @@ Para este app funcionar, habilitamos no arquivo de configuração:
 - `CONFIG_PRINTK=y`: Permite o envio de strings formatadas para o console.
 
 ### Como rodar:
-```bash
-west build -b qemu_x86 app/print
-west build -t run
+Antes de executar a aplicação, configure no seu computador as ferramentas necessárias:
+- QEMU
+- WEST
+- ZEPHYR
+- CMAKE
+- PYTHON
+- 
+Depois disso:
+
+1. Crie um workspace do Zephyr.
+2. Coloque este projeto dentro da pasta do workspace.
+3. Execute o arquivo `run.bat`.
+
+Esse script será responsável por compilar e rodar a aplicação.
+
