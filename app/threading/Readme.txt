@@ -14,7 +14,7 @@ Esta aplicação demonstra a criação e o gerenciamento de threads independente
 3. **Controle de prioridade:** permite definir a prioridade das tarefas, ajudando no comportamento previsível do sistema.
 
 ### Como rodar:
-Antes de executar a aplicação, configure no seu computador as ferramentas necessárias:
+Antes de executar a aplicação, configure no seu computador as ferramentas necessárias, configurando e adicionando as mesma no PATH:
 - QEMU
 - West
 - Zephyr
