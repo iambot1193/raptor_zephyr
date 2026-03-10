@@ -1,37 +1,30 @@
 @echo off
-setlocal
+cls
+echo --- Iniciando Build e Execucao: raptor_zephyr ---
 
-cd /d "%~dp0"
-cd ..\..
-
-echo === Build e execucao: app/print ===
-
-where west >nul 2>nul
-if errorlevel 1 (
-    echo [ERRO] O comando WEST nao foi encontrado no PATH.
-    echo Verifique a instalacao do ambiente Zephyr.
-    pause
-    exit /b 1
+:: 1. Limpa a pasta de build anterior para evitar conflitos
+if exist build (
+    echo Limpando pasta de build antiga...
+    rmdir /s /q build
 )
 
-west build -b qemu_x86 app/print -p always
-if errorlevel 1 (
-    echo [ERRO] Falha na compilacao.
+:: 2. Tenta compilar o projeto
+echo Compilando app/print...
+west build -b native_sim raptor_zephyr/app/print
+
+:: 3. Verifica se a compilacao deu certo antes de tentar rodar
+if %errorlevel% neq 0 (
+    echo.
+    echo [ERRO] Falha na compilacao. Verifique o log acima.
     pause
-    exit /b 1
+    exit /b
 )
 
-if not exist "build\zephyr\zephyr.elf" (
-    echo [ERRO] O arquivo build\zephyr\zephyr.elf nao foi gerado.
-    pause
-    exit /b 1
-)
-
+:: 4. Executa o programa
+echo.
+echo --- Executando Aplicativo ---
 west build -t run
-if errorlevel 1 (
-    echo [ERRO] Falha ao executar no QEMU.
-    pause
-    exit /b 1
-)
 
-endlocal
+echo.
+echo --- Processo Finalizado ---
+pause
