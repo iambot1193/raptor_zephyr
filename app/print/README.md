@@ -24,7 +24,7 @@ Antes de executar a aplicação, configure no seu computador as ferramentas nece
 - ZEPHYR
 - CMAKE
 - PYTHON
-- 
+  
 Depois disso:
 
 1. Crie um workspace do Zephyr.
