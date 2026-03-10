@@ -1,27 +1,31 @@
-Threading (Multitarefa)
-Esta aplicação demonstra a criação e o gerenciamento de threads independentes utilizando o escalonador do Zephyr RTOS. O foco é a execução periódica e o controle de tempo real.
+# Threading (Multitarefa)
 
-O que faz:
-Define uma estrutura de pilha (Stack) e prioridade para uma thread secundária.
+Esta aplicação demonstra a criação e o gerenciamento de threads independentes utilizando o escalonador do **Zephyr RTOS**. O foco está na execução periódica de tarefas e no controle de tempo em sistemas embarcados.
 
-Utiliza a macro K_THREAD_DEFINE para inicialização automática da tarefa.
+### O que faz:
+- Define pilha (**stack**) e prioridade para uma thread secundária.
+- Utiliza a macro `K_THREAD_DEFINE` para inicialização automática da tarefa.
+- Executa um loop infinito que monitora o tempo de atividade (**uptime**) do sistema.
+- Controla o intervalo de execução com `k_msleep`.
 
-Executa um loop infinito que monitora o tempo de atividade (Uptime) do sistema.
+### Por que usar Threads e `k_msleep`?
+1. **Multitarefa real:** permite que o processador execute outras tarefas enquanto uma thread está em espera.
+2. **Eficiência no uso de recursos:** o `k_msleep` coloca a thread em estado de espera, liberando o processador para outras execuções.
+3. **Controle de prioridade:** permite definir a prioridade das tarefas, ajudando no comportamento previsível do sistema.
 
-Controla o intervalo de execução utilizando k_msleep.
+### Como rodar:
+Antes de executar a aplicação, configure no seu computador as ferramentas necessárias:
+- QEMU
+- West
+- Zephyr
+- CMake
+- Python
+- Git
 
-Por que usar Threads e k_msleep?
-Multitarefa Real: Permite que o processador execute outras funções enquanto uma thread está aguardando.
+Depois disso:
+1. Crie um workspace do Zephyr.
+2. Coloque este projeto dentro da pasta do workspace.
+3. Acesse a pasta da aplicação correspondente.
+4. Execute o arquivo `run.bat`.
 
-Eficiência Energética: O uso de k_msleep coloca a thread em estado de espera (Wait), liberando recursos do kernel.
-
-Determinismo: Garante que tarefas críticas tenham prioridades definidas (Priority 7) em relação a tarefas de fundo.
-
-Configuração (prj.conf):
-Para o gerenciamento de threads e logs precisos, habilitamos:
-
-CONFIG_LOG_MODE_IMMEDIATE=y: Garante que o log seja enviado ao console no momento exato do evento, evitando atrasos de buffer.
-
-CONFIG_QEMU_ICOUNT=y: Sincroniza o contador de instruções do simulador com o relógio do hospedeiro.
-
-CONFIG_MINIMAL_LIBC=y: Otimiza o uso de bibliotecas C para sistemas embarcados de baixa memória.
+Esse script será responsável por compilar e rodar a aplicação.
