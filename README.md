@@ -1,18 +1,21 @@
 # Projeto Zephyr RTOS - Desafio Raptor
 
-Este projeto consiste na implementação de uma aplicaçao em ambiente virtual, utilizando o **Zephr OS** e o simlador **QUEMU**
+Este projeto apresenta uma aplicação desenvolvida em ambiente virtual com **Zephyr RTOS** e executada no simulador **QEMU**.
 
-## objetivo
-Simular o funcionamento de um hardware que exiba a mensagem: 
-"Hello World! This is Raptor!"
+## Objetivo
 
-## Tecnologias Utilizadas
-* **Zephyr RTOS**: Sistema Operacional de Tempo Real.
-* **QEMU**: Emulador de hardware para virtualização.
-* **West**: Ferramenta de gerenciamento do ecossistema Zephyr.
-* **Zephyr SDK (GNU)**: Toolchain para compilação.
+Simular o comportamento de um sistema embarcado capaz de exibir a mensagem:
+> Hello World! This is Raptor!
 
-## Estrutura do Projeto
-* `app/`: Código-fonte e configurações da aplicação.
-* `docs/`: Relatórios técnicos e documentação.
-* `scripts/`: Utilitários para build e execução.
+## Tecnologias utilizadas
+
+- Zephyr RTOS
+- C
+- QEMU
+- West
+- CMake
+
+## Estrutura do projeto
+
+- `app/`: código-fonte e arquivos de configuração da aplicação.
+- `scripts/`: utilitários para build e execução.
